@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUIBC.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Image
+                Source="web3icon.png"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Hello, Ethereum Web3 DApp World!"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Welcome to .NET Nethereum Meeting Room Booking DApp"
+                SemanticProperties.HeadingLevel="Level2"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            <Label
+                Text="Wallet status: Disconnect"
+                SemanticProperties.HeadingLevel="Level3"
+                FontSize="16"
+                x:Name="WalletStatus"
+                HorizontalOptions="Center" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Scale="4" Color="black"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   IsVisible="{Binding IsBusy}" />
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label x:Name="ProfileLabel" FontSize="16" VerticalOptions="Center" FontAttributes="Bold" Margin="0,0,-3,0"/>
+                <Label Text="Wallet Private Key :" FontSize="16" VerticalOptions="Center" Padding="10,0" />
+                <Entry x:Name="PrivateKey" Placeholder="Enter wallet private key" MinimumWidthRequest="400" IsPassword="True" />
+            </StackLayout>
+
+            <Button
+                x:Name="LoginBtn"
+                Text="Connect to your Wallet"
+                SemanticProperties.Hint="Connect to your Wallet to sign transactions"
+                Clicked="OnLoginClicked"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MAUIBC.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MAUIBC"
+    xmlns:ChatMAUI="clr-namespace:ChatMAUI"
+    Shell.FlyoutBehavior="Flyout">
+
+    <ShellContent x:Name="ShellBar"
+        Title="Wallet Connection"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellItem Route="MyTokens" Title="Booking Enquiry">
+        <ShellContent ContentTemplate="{DataTemplate local:NFTListPage}" />
+    </ShellItem>
+    <ShellItem Route="MintTokens" Title="New Booking">
+        <ShellContent ContentTemplate="{DataTemplate local:MintNFTPage}" />
+    </ShellItem>
+    <ShellItem Route="ReleaseBooking" Title="Release Booking">
+        <ShellContent ContentTemplate="{DataTemplate local:ReleaseBookingPage}" />
+    </ShellItem>
+    <ShellItem Route="ReClaimBooking" Title="Reclaim Booking">
+        <ShellContent ContentTemplate="{DataTemplate local:ReClaimBookingPage}" />
+    </ShellItem>
+    <ShellItem Route="HouseKeep" Title="Clean-up expired Bookings">
+        <ShellContent ContentTemplate="{DataTemplate local:HouseKeepPage}" />
+    </ShellItem>
+    <ShellItem Route="ChatGPT" Title="ChatGPT">
+        <ShellContent ContentTemplate="{DataTemplate ChatMAUI:BlazorWebView}" />
+    </ShellItem>
+</Shell>

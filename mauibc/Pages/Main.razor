@@ -1,0 +1,81 @@
+﻿@page "/"
+
+@using System.Text.Json
+@using System.Text
+@using System.Net.Http.Headers
+@using System.Linq
+@using System.Text.Json.Serialization
+@inject IJSRuntime JSRuntime
+@inject IOpenAI OpenAI;
+
+@namespace ChatMAUI
+
+<div class="main">
+	<div class="conversation-panel" id="conversation-panel">
+		<ul class="chat-list">
+			@foreach (var msg in OpenAI.chatHistory) {
+				<li class="message">
+					@if (msg.Role == Microsoft.SemanticKernel.ChatCompletion.AuthorRole.User) {
+						<div class="user-message-container"><pre class="message-body">@msg.Content</pre></div>
+					} else if (msg.Content != null && msg.Role == Microsoft.SemanticKernel.ChatCompletion.AuthorRole.Assistant) {
+						<div class="bot-message-container"><pre class="message-body">@msg.Content</pre></div>
+					}
+				</li>
+			}
+		</ul>
+	</div>
+</div>
+@if (isSending) {
+	<div class="spinner"></div>
+}
+<div class="footer">
+	<label for="newMessage">Question: </label>
+	<textarea class="message-content" @bind="@newMessage" 
+		style="height:50px; border: 1px solid #000; margin: 10px;" 
+		oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';">
+	</textarea>
+	<button class="btn btn-primary" @onclick="SendChat">Send</button>
+</div>
+<div role="alert" class="error-message @(string.IsNullOrEmpty(errorMessage) ? "hidden" : "")">
+	@errorMessage
+	<button type="button" class="close-error" data-dismiss="alert" aria-label="Close" @onclick="() => errorMessage = string.Empty">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+@code {
+	private string newMessage;
+	private string errorMessage = "";
+	private bool isSending = false;
+
+	protected override async Task OnInitializedAsync() {
+		await OpenAI.startChat();
+		await base.OnInitializedAsync();
+		OpenAI.ChatHistoryCleared += HandleChatHistoryCleared;
+	}
+	
+    private void HandleChatHistoryCleared(object? sender, EventArgs e) {
+		StateHasChanged();
+    }
+
+	private async Task SendChat() {
+		OpenAI.chatHistory.AddUserMessage(newMessage);
+		isSending = true; 
+		await Task.Yield();
+		StateHasChanged();
+		await JSRuntime.InvokeVoidAsync("scrollToBottom", "conversation-panel");
+
+		try
+		{
+			var response = await OpenAI.getResponse(newMessage);
+			newMessage = "";
+		} catch (Exception ex) {
+            errorMessage = ex.Message;
+        }
+		isSending = false;
+
+		await Task.Yield();
+		StateHasChanged();
+		await JSRuntime.InvokeVoidAsync("scrollToBottom", "conversation-panel");
+	}
+}

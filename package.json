@@ -1,0 +1,11 @@
+{
+    "name": "DEMO2",
+    "version": "0.2.0",
+    "private": true,
+    "dependencies": {
+        "@openzeppelin/contracts": "^4.5.0",
+        "counters": "^0.0.2",
+        "moment": "2.29.4",
+        "truffle-assertions": "^0.9.2"
+    }
+}

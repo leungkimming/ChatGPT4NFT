@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUIBC.ReClaimBookingPage"
+             Title="Reclaim Booking">
+    <Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout
+            Spacing="25" Grid.Row="1"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Reclaim NFT Token Id :" FontSize="16" VerticalOptions="Center" Padding="10,0" />
+                <Entry Placeholder="Enter NFT Token Id" Text="{Binding tokenId}"/>
+            </StackLayout>
+
+            <Button
+                x:Name="ReclaimButton"
+                Text="Reclaim"
+                SemanticProperties.Hint="Reclaim your booking"
+                Clicked="OnReclaimClicked"
+                HorizontalOptions="Center" />
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Message :" FontSize="16" VerticalOptions="Center" Padding="10,0" />
+                <Label x:Name="Message" FontSize="16" VerticalOptions="Center" />
+            </StackLayout>
+        </VerticalStackLayout>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" Grid.Row="1" Scale="4" Color="black"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   IsVisible="{Binding IsBusy}" />
+    </Grid>
+</ContentPage>

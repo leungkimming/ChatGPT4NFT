@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUIBC.NFTListPage"
+             Title="Booking Enquiry"
+             x:Name="ThisPage">
+    <VerticalStackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center"
+            RadioButtonGroup.GroupName="NFTOptions" Padding="0,10,0,20"
+                RadioButtonGroup.SelectedValue="{Binding SelectedOption}">
+                <RadioButton Content="My bookings" Value="My" />
+                <RadioButton Content="Released bookings" Value="Vacant" />
+                <RadioButton Content="Bookings by Month (UTC)" Value="All" />
+            <DatePicker x:Name="BookingMonth" Format="MMM-yyyy" Date="{Binding MonthSelect}" />
+            <Button x:Name="ApplyButton" Text="Search" Clicked="ApplyButton_Clicked" Margin="50,1,1,1" />
+        </StackLayout>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" Scale="2" Color="black"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   IsVisible="{Binding IsBusy}" />
+        <BoxView HeightRequest="1" Color="Black" Margin="0,0,0,5" />
+        <ScrollView Margin="10,0,0,0">
+            <CollectionView ItemsSource="{Binding NFTList}">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions = "1*,5*,3*,1*,*">
+                        <Label Grid.Row="0" Grid.Column="0" Text="TokenId" />
+                        <Label Grid.Row="0" Grid.Column="1" Text="Owner" />
+                        <Label Grid.Row="0" Grid.Column="2" Text="Booking Date (UTC)" />
+                        <Label Grid.Row="0" Grid.Column="3" Text="Vacant" />
+                        <Label Grid.Row="0" Grid.Column="4" Text="Action" />
+                    </Grid>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions = "1*,5*,3*,1*,*">
+                            <Label Text="{Binding Id}" Grid.Column="0"/>
+                            <Label Text="{Binding Owner}" Grid.Column="1"/>
+                            <Label Grid.Column="2" >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding BookingDate, StringFormat='{0:dd/MM/yyyy}'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <!--<Label Text="{Binding BookingDate}" Grid.Column="2" FormattedText=""/>-->
+                            <Label Text="{Binding Vacant}" Grid.Column="3" />
+                            <Label Text="Release" Grid.Column="4" IsVisible="{Binding enableRelease}" FontAttributes="Italic" TextDecorations="Underline">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ReleaseCommand, Source={x:Reference ThisPage}}"
+                                      CommandParameter="{Binding Id}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Text="ReClaim" Grid.Column="4" IsVisible="{Binding enableReclaim}" FontAttributes="Italic" TextDecorations="Underline">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ReclaimCommand, Source={x:Reference ThisPage}}"
+                                      CommandParameter="{Binding Id}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>

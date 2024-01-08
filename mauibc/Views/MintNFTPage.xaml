@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUIBC.MintNFTPage"
+             Title="New Booking">
+    <Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout
+            Spacing="25" Grid.Row="1"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Meeting Date (UTC) :" FontSize="16" VerticalOptions="Center" Padding="10,0" />
+                <DatePicker x:Name="BookingDate" Format="dd/MM/yyyy" MinimumDate="{Binding Tomorrow}" />
+            </StackLayout>
+
+            <Button
+                x:Name="MintButton"
+                Text="Create NFT"
+                SemanticProperties.Hint="Create NFT of your chosen booking date"
+                Clicked="OnMintClicked"
+                HorizontalOptions="Center" />
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Message :" FontSize="16" VerticalOptions="Center" Padding="10,0" />
+                <Label x:Name="Message" FontSize="16" VerticalOptions="Center" />
+            </StackLayout>
+        </VerticalStackLayout>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" Grid.Row="1" Scale="4" Color="black"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   IsVisible="{Binding IsBusy}" />
+    </Grid>
+</ContentPage>
