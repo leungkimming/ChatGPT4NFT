@@ -1,4 +1,4 @@
-# MeetingRoom NFT Contract Explained
+# 2. MeetingRoom NFT Contract Walkthrough
 * It is written in the Solidity Language compiled to WASM bytecode stored in an ethereum blockchain
 * Each deployment of this contract to the blockchain will create a seperate instance with an unique contract address
 * It will run in one of the ethereum blockchain's node
@@ -61,4 +61,3 @@
         * Need to delete the corresponding elements in _bookingDates[] & _nfts[]
         * That's why in most function, we need to check _exists(i) before accessing _nfts[i]
 * For the rest of the functions, please refer to the coding.
-## [Return to Readme](README.md)

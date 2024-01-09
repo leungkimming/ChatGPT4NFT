@@ -1,5 +1,13 @@
-# Test blockchain in Infura and Metamask wallets
-## Setup your private chain
+# 2. Deploy to Testing Environment with Wallets
+* Setup Infura private chain
+* Setup web wallet
+* Setup mobile wallet
+* Deploy contract to Infura
+* Give NFT a meaningful graphics
+* Run unit tests in testing environment
+* Import resulting NFT into mobile wallet
+
+## Setup Infura private chain
 * Navigate to [Infura Web](https://app.infura.io/)
 * Register with a free plan
 * Click "CREATE NEW API KEY"
@@ -18,7 +26,7 @@ https://sepolia.infura.io/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
     "Network": "https://sepolia.infura.io/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 ```
-## Setup your web wallet
+## Setup web wallet
 * We are going to use your browser's Metamask wallet for testing. Never use it to manage your real crypto currencies or NFT!
 * Install
     * In Edge/Chrom browser, click 'Extensions' icon
@@ -59,7 +67,7 @@ https://sepolia.infura.io/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     * Click on Infura web's 'Faucet'
     * Paste your address and click 'RECEIVE ETH'
     * Wait a minute and your wallet have 0.5 Ether to use as gas for testing
-## Setup your mobile wallet as MyFriend in the unit testing
+## Setup mobile wallet as MyFriend in the unit testing
 * You are using your MetaMask mobile wallet for testing. Never use it to manage real crypto currencies or NFT
 * Install
     * In App Store / Google Play Store, search for metaMask
@@ -95,7 +103,7 @@ https://sepolia.infura.io/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 * This is the TRUFFLE Dashboard web
 * Click the 'Click to connect' on left bottom
 * Logon MetaMask wallet as instructed
-## Deploy your contract to Infura
+## Deploy contract to Infura
 * In another DOS prompt, CD to the project folder
     * Execute 'truffle compile'
     * Execute 'truffle deploy --network dashboard'
@@ -114,8 +122,8 @@ https://sepolia.infura.io/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 },
 "Profile": "Infura"
 ```
-
-## NFT metadata & image generator Azure Function
+## Give NFT a meaningful graphics
+* Build NFT metadata & image generator Azure Functions
 ### Deisgn
 * Recall that when you mint a NFT, you will assign an unique, unchangeable URI, which will return a metadata, containing
     * Booking Date
@@ -154,12 +162,12 @@ https://sepolia.infura.io/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 * add <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
 * You can test it locally and if ok, deploy to Azure
 
-## Run unit test on Infura network
+## Run unit test in testing enviornment
 * Run the unit test again today and tomorrow (for testing expired NFT clean up)
 * Record the NFT IDs created
     * Id 1 belongs to your MetaMask web wallet's account
     * Id 2 belongs to your MetaMask mobile wallet's account (it was transferred to MyFriend in one of the unit test)
-## Import NFT to your MetaMask wallet
+## Import NFT to mobile wallets
 * After successful running of unit testing on the Infura network, a few NFTs are created with their Ids recorded
 * Login web or mobile MetaMask wallet
 * Click the 'NFTs' tab in the middle of the wallet

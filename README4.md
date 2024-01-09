@@ -1,12 +1,19 @@
-# Create a ChatGPT bot to do the same things as in the MAUI App
+# 4. Build a ChatGPT Bot to Manage the NFT Contract
+* Introduction to writing ChatGPT 'Prompts'
+* Instruct ChatGPT to response to our request to do NFT booking operations
+* Inform ChatGPT what functions are available for calling and when and how to call them
+* The ChatGPT Bot structure
+* Add the Chatbot Blazor web app to the existing MAUI App
+* Examples of dialogue that we can create with ChatGPT
+
+## Introduction to writing ChatGPT 'Prompts' 
 * Building functions using ChatGPT created an obvious paradigm shift in the way we give instructions to computers
 * In the past, we give exact logical instructions in form of a syntactic language to computers, such is set, if/then/else, while, call, etc.
 * To give instructions to ChatGPT, we write semantic 'prompts' in human languages
 * [OpenAI's guide of writing better Prompts](https://platform.openai.com/docs/guides/prompt-engineering/six-strategies-for-getting-better-results)
 * All program codings are already in the 'mauibc' folder
-## OpenAI
-* Need an OpenAI trial account or even better, a paid account that pay as you go
-## How to instruct ChatGPT to response to our request to do NFT booking operations?
+* You need an OpenAI trial account or even better, a paid account that pay as you go
+## Instruct ChatGPT to response to our request to do NFT booking operations
 * Below is the prompt we give to ChatGPT
 ```
 You are a booking officer in the customer service counter. Please answer questions about bookings by following the instructions below.
@@ -26,7 +33,7 @@ You are a booking officer in the customer service counter. Please answer questio
 - Use the Enquire Availablility function to check a single date. Use the List Available Dates function to check a range of dates.
 - if error is 'wallet not connected', please ask the customer to connect the wallet first.
 ```
-## How ChatGPT know what functions are available for calling and when and how to call them?
+## Inform ChatGPT what functions are available for calling and when and how to call them
 * It is the 'function calling' feature of OpenAI
 * We create 'Plugins' to tell OpenAI what functions are availabe and their meaning and usage
 * E.g. in the Prompt above, we instruct ChatGPT to check the date's booking status and booking Id
@@ -69,9 +76,9 @@ public string CheckBookingStatus(
     return message;
 }
 ```
-## SemanticKernel (SK) Nuget package
+## The ChatGPT Bot structure
+### SemanticKernel (SK) Nuget package
 * An open source developed by Microsoft to encapsulate OpenAI, ChatGPT, hugging face, etc into a C# library
-## Program structure
 ### Plugins
 * SK\NFTPlugin.cs: The major NFT functions, which in turn call the NFTService.cs in the MAUI App
 * SK\TimePlugin.cs: Today, Tomorrow, Next Tuesday, Next Month, etc. ChatGPT is weak in date arithmetics
@@ -120,7 +127,7 @@ window.scrollToBottom = (elementId) => {
 * Models\NFT.cs & Service\NFTService.cs
     * Reuse files in MAUI App
 * SK\ConsoleLogger.cs & Env.cs: SemanticKernel utilities
-## Add the Chatbot Blazor web app to the MAUI App
+## Add the Chatbot Blazor web app to the existing MAUI App
 * To make it more interesting, ChatGPT will be hosted as a Blazor web app inside the MAUI App
 * [How to Add a Blazor web app in an existing .NET MAUI app](https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/blazorwebview?view=net-maui-8.0)
 * Views\BlazorWebView.xaml
@@ -130,7 +137,7 @@ window.scrollToBottom = (elementId) => {
     * builder.Services.AddBlazorWebViewDeveloperTools();
     * Register dependency injection for OpenAI, Plugins and BlazorWebView
 * AppShell.xaml: add route to BlazorWebView
-## Examples of instructions (A new way of man-machine interface)
+## Examples of dialogue that we can create with ChatGPT
 * Please make booking on 15/02/2024 for me.
 * Please show all my bookings.
 * Is next Thursday available for booking?

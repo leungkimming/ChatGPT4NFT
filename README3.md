@@ -1,10 +1,10 @@
-# Create an MAUI App for the Contract
-* Install Microsoft Visual Studio latest community edition, including latest .NET and cross platform development tools
+# 3. Build a MAUI UI to Manage the NFT Contract 
+* We will build a traditional UI using the MIcrosoft MAUI Framework
 * Copy the 'mauibc' folder to your project folder
 * [MAUI Get Started](https://learn.microsoft.com/en-us/dotnet/maui/get-started/first-app?view=net-maui-8.0&tabs=vswin&pivots=devices-windows)
 ## Program Structure
 * Ignore the ChatGPT AI part for now. It will be covered in the next section
-* Most of the coding is copy and adopted from unit testing coding
+* Most of the coding can be copied and adopted from unit testing coding
 * Resources\Raw\appsettings_sample.json:
     * rename to appsettings.json
     * similar to that in the unit test
@@ -35,37 +35,37 @@
         * Clear the contract, Balance, MyAddress & IsConnect property
 * ActivityIndicator control
     * various xaml files
-```
-<ActivityIndicator IsRunning="{Binding IsBusy}" Scale="4" Color="black"
-    HorizontalOptions="Center"
-    VerticalOptions="Center"
-    IsVisible="{Binding IsBusy}" />
-```
+    ```
+    <ActivityIndicator IsRunning="{Binding IsBusy}" Scale="4" Color="black"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        IsVisible="{Binding IsBusy}" />
+    ```
     * wwwroot\css\app.css
-```
-.spinner {
-    border: 16px solid silver;
-    border-top: 16px solid #337AB7;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    animation: spin 700ms linear infinite;
-    top: 40%;
-    left: 55%;
-    position: absolute;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg)
+    ```
+    .spinner {
+        border: 16px solid silver;
+        border-top: 16px solid #337AB7;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 700ms linear infinite;
+        top: 40%;
+        left: 55%;
+        position: absolute;
     }
 
-    100% {
-        transform: rotate(360deg)
-    }
-}
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg)
+        }
 
-```
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+
+    ```
 * AppShell.xaml:
     * MainPage as first page
     * Menu to go to different Routes
@@ -93,4 +93,3 @@
 * Remember to import those NFTs as instructed by the program
 * You can transfer NFTs among these mobiles provided that they are not yet expired
 * Read the next section before trying the ChatGPT function
-## [Next, we will create a ChatGPT bot to do the same things as MAUI App](README4.md)
