@@ -15,7 +15,7 @@
 ## [2. MeetingRoom NFT Contract Walkthrough](README1.md)
 ## [3. Deploy to Testing Environment with Wallets](README2.md)
 ## [4. Build a MAUI UI to Manage the NFT Contract](README3.md)
-## [5. Build a ChatGPT Bot to Manage the NFT Contract](README4.md)
+## [5. Build a SK ChatGPT Bot to Manage the NFT Contract](README4.md)
 
 # Credits
 * Nodejs

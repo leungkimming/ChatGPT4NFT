@@ -48,8 +48,8 @@ C:\Users\<user>\AppData\Roaming\npm;
 * 'dashboard' network is for conneting the Metamask wallet's testing chain on the Cloud.
 ### Contract development
 * Copy the MeetingRoom.sol to the contracts folder. This is our NFT Contact code.
+    * We will walkthrough this contract in the next section
 * Copy the 1_MeetingRoom.js to the migrations folder. This is for deploying the contract to the testing chains.
-* [MeetingRoom NFT Contract Explained](README1.md)
 * To start the ethereum development blockchain
     * In DOS prompt, CD to MyProject folder adn create a new folder call 'Chain'
     * Execute 'ganache -d --database.dbPath D:\Repos\Labs\Blockchain\MeetingRoom\Chain -i 123456'

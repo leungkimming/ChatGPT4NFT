@@ -175,5 +175,5 @@ https://sepolia.infura.io/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     * Input Address = the Contract address in appsettings.json, Infura, ContractAddress
     * Token ID = the NFT IDs by which your wallet own
     * The NFT image is the picture of the UTC booking date of the NFT
-[Next, create an MAUI App for the Contract](README3.md)
+
 

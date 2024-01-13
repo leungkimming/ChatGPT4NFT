@@ -1,10 +1,14 @@
-# 4. Build a ChatGPT Bot to Manage the NFT Contract
+# 4. Build a SK ChatGPT Bot to Manage the NFT Contract
+* Install the SemanticKernel (SK) Nuget package
 * Introduction to writing ChatGPT 'Prompts'
 * Instruct ChatGPT to response to our request to do NFT booking operations
 * Inform ChatGPT what functions are available for calling and when and how to call them
 * The ChatGPT Bot structure
 * Add the Chatbot Blazor web app to the existing MAUI App
 * Examples of dialogue that we can create with ChatGPT
+
+## Install the SemanticKernel (SK) Nuget package
+* An open source developed by Microsoft to encapsulate OpenAI, ChatGPT, hugging face, etc into a C# library
 
 ## Introduction to writing ChatGPT 'Prompts' 
 * Building functions using ChatGPT created an obvious paradigm shift in the way we give instructions to computers
@@ -77,8 +81,6 @@ public string CheckBookingStatus(
 }
 ```
 ## The ChatGPT Bot structure
-### SemanticKernel (SK) Nuget package
-* An open source developed by Microsoft to encapsulate OpenAI, ChatGPT, hugging face, etc into a C# library
 ### Plugins
 * SK\NFTPlugin.cs: The major NFT functions, which in turn call the NFTService.cs in the MAUI App
 * SK\TimePlugin.cs: Today, Tomorrow, Next Tuesday, Next Month, etc. ChatGPT is weak in date arithmetics
