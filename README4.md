@@ -9,7 +9,10 @@
 
 ## Install the SemanticKernel (SK) Nuget package
 * An open source developed by Microsoft to encapsulate OpenAI, ChatGPT, hugging face, etc into a C# library
-
+* [GitHub source](https://github.com/microsoft/semantic-kernel)
+```
+<PackageReference Include="Microsoft.SemanticKernel" Version="1.0.1" />
+```
 ## Introduction to writing ChatGPT 'Prompts' 
 * Building functions using ChatGPT created an obvious paradigm shift in the way we give instructions to computers
 * In the past, we give exact logical instructions in form of a syntactic language to computers, such is set, if/then/else, while, call, etc.
