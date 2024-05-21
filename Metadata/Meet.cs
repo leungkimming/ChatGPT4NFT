@@ -2,34 +2,33 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Drawing;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.Azure.Functions.Worker.Http;
 
-namespace Metadata
+namespace Metadata1
 {
-    public static class Meet
+    public class Meet
     {
-        [FunctionName("metadata")]
-        public static async Task<IActionResult> Metadata(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log) {
-            log.LogInformation("C# HTTP trigger function processed a Metadata request.");
+        private readonly ILogger<Meet> _logger;
+
+        public Meet(ILogger<Meet> logger) {
+            _logger = logger;
+        }
+
+        [Function("metadata")]
+        public IActionResult metadata(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req) {
+            _logger.LogInformation("C# HTTP trigger function processed a Metadata request.");
 
             string date = req.Query["date"];
             string ID = req.Query["ID"];
-
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            date = date ?? data?.date;
-            ID = ID ?? data?.id;
-
             string responseMessage = $@"{{
 ""description"": ""{ date}"",
 ""image"": ""https://{req.Host.Value}/api/Image?ID={ID}&date={date}"",
@@ -38,19 +37,13 @@ namespace Metadata
             return new OkObjectResult(responseMessage);
         }
 
-        [FunctionName("image")]
-        public static async Task<HttpResponseMessage> Image(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log) {
-            log.LogInformation("C# HTTP trigger function processed a image request.");
+        [Function("image")]
+        public IActionResult Image(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req) {
+            _logger.LogInformation("C# HTTP trigger function processed a image request.");
 
             string date = req.Query["date"];
             string ID = req.Query["ID"];
-
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            date = date ?? data?.date;
-            ID = ID ?? data?.id;
 
             var bitmap = new Bitmap(500, 500);
             var graphics = Graphics.FromImage(bitmap);
@@ -63,12 +56,7 @@ namespace Metadata
             bitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
             memoryStream.Position = 0;
 
-            var result = new HttpResponseMessage(HttpStatusCode.OK) {
-                Content = new StreamContent(memoryStream)
-            };
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
-
-            return result;
+            return new OkObjectResult(memoryStream);
         }
 
 		//[FunctionName("image1")]
